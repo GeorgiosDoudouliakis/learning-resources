@@ -1,27 +1,93 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <TheHeader/>
+  <main>
+    <TheTabs @activeTabHandler="setActiveTab($event)"/>
+    <keep-alive>
+      <component :is="activeTab === 'Stored Resources' ? 'StoredResources' : 'AddResource'"></component>
+    </keep-alive>
+  </main>
+  <TheFooter/>
 </template>
 
 <script lang="ts">
+/* Place Vue imports here */
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+
+/* Place component imports here */
+import TheHeader from "@/components/layout/TheHeader.vue";
+import TheTabs from "@/components/layout/TheTabs.vue";
+import TheFooter from "@/components/layout/TheFooter.vue";
+import StoredResources from "@/views/StoredResources.vue";
+import AddResource from "@/views/AddResource.vue";
+
+/* Place any other imports here */
+import {ActiveTab} from "@/types/active-tab.type";
+import {RESOURCES} from "@/mock/resources.mock";
+import {Resource} from "@/interfaces/resource.interface";
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    TheHeader,
+    TheTabs,
+    StoredResources,
+    AddResource,
+    TheFooter
+  },
+  data() {
+    return {
+      activeTab: "Stored Resources" as ActiveTab,
+      resources: RESOURCES
+    }
+  },
+  methods: {
+    setActiveTab(tab: ActiveTab): void {
+      this.activeTab = tab;
+    },
+    addResource(resource: Resource): void {
+      const { title, description, link } = resource;
+      if(title === "" || description === "" || link === "") return;
+      this.resources.push(resource);
+    },
+    deleteResource(resourceId: number): void {
+      const deletedResourceId = this.resources.findIndex((resource: Resource) => resource.id === resourceId);
+      this.resources.splice(deletedResourceId, 1);
+    }
+  },
+  provide() {
+    return {
+      resources: this.resources,
+      addResource: this.addResource,
+      deleteResource: this.deleteResource
+    }
   }
 });
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    font-family: "Agency FB", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+  main {
+    min-height: calc(100vh - 105px);
+  }
+
+  button {
+    font-size: 1.3rem;
+    padding: .3rem .8rem;
+    background: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: .4s ease-in-out;
+    &:hover {
+      color: #fff;
+      background: #2364b7;
+    }
+  }
 </style>

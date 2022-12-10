@@ -1,4 +1,5 @@
-# learning-resources-app
+# Learning Resources App
+Practice on basic VueJS v3 concepts
 
 ## Project setup
 ```
@@ -9,16 +10,3 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
