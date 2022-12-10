@@ -19,7 +19,5 @@ export default defineComponent({
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
-    width: 80vw;
-    margin: auto;
   }
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <p>Number of resources: {{ resources.length }}</p>
   <base-layout>
     <BaseResource v-for="resource in resources" :key="resource.id" :resource="resource"/>
   </base-layout>
@@ -21,3 +22,11 @@ export default defineComponent({
   inject: ['resources']
 })
 </script>
+
+<style scoped lang="scss">
+  p {
+    font-size: 1.3rem;
+    width: 80vw;
+    margin: 0 auto 2rem auto;
+  }
+</style>

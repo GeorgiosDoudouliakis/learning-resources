@@ -74,6 +74,8 @@ export default defineComponent({
   }
 
   main {
+    width: 80vw;
+    margin: auto;
     min-height: calc(100vh - 105px);
   }
 
