@@ -7,6 +7,9 @@
     </keep-alive>
   </main>
   <TheFooter/>
+  <teleport to="body">
+      <BaseSnackbar v-if="isSnackbarVisible"/>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -19,6 +22,7 @@ import TheTabs from "@/components/layout/TheTabs.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
 import StoredResources from "@/views/StoredResources.vue";
 import AddResource from "@/views/AddResource.vue";
+import BaseSnackbar from "@/components/base/BaseSnackbar.vue";
 
 /* Place any other imports here */
 import {ActiveTab} from "@/types/active-tab.type";
@@ -32,12 +36,14 @@ export default defineComponent({
     TheTabs,
     StoredResources,
     AddResource,
-    TheFooter
+    TheFooter,
+    BaseSnackbar
   },
   data() {
     return {
       activeTab: "Stored Resources" as ActiveTab,
-      resources: RESOURCES
+      resources: RESOURCES as Resource[],
+      isSnackbarVisible: false as boolean
     }
   },
   methods: {
@@ -48,10 +54,18 @@ export default defineComponent({
       const { title, description, link } = resource;
       if(title === "" || description === "" || link === "") return;
       this.resources.push(resource);
+      this.showSnackbar();
     },
     deleteResource(resourceId: number): void {
       const deletedResourceId = this.resources.findIndex((resource: Resource) => resource.id === resourceId);
       this.resources.splice(deletedResourceId, 1);
+    },
+    showSnackbar(): void {
+      this.isSnackbarVisible = true;
+      const timeout = setTimeout(() => {
+        this.isSnackbarVisible = false;
+        clearTimeout(timeout);
+      }, 3000);
     }
   },
   provide() {
