@@ -43,16 +43,11 @@ export default defineComponent({
   methods: {
     setActiveTab(tab: ActiveTab): void {
       this.activeTab = tab;
-    },
-    deleteResource(resourceId: number): void {
-      const deletedResourceId = this.resources.findIndex((resource: Resource) => resource.id === resourceId);
-      this.resources.splice(deletedResourceId, 1);
     }
   },
   provide() {
     return {
-      resources: this.resources,
-      deleteResource: this.deleteResource
+      resources: this.resources
     }
   }
 });

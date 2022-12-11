@@ -10,11 +10,18 @@
 <script lang="ts">
 /* Place Vue imports here */
 import {defineComponent} from "vue";
+import {Resource} from "@/interfaces/resource.interface";
 
 export default defineComponent({
   name: "BaseResource",
   props: ['resource'],
-  inject: ['deleteResource']
+  inject: ['resources'],
+  methods: {
+    deleteResource(resourceId: number): void {
+      const deletedResourceId = (this.resources as Resource[]).findIndex((resource: Resource) => resource.id === resourceId);
+      (this.resources as Resource[]).splice(deletedResourceId, 1);
+    }
+  }
 })
 </script>
 
