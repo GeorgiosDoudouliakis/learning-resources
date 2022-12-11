@@ -1,7 +1,7 @@
 <template>
   <div class="back">
     <div class="dialog">
-      <p>You have to fill in all fields in order to proceed!</p>
+      <p>All fields are required!</p>
       <button @click="$emit('close-dialog')">Close</button>
     </div>
   </div>

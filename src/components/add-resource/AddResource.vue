@@ -59,6 +59,7 @@ export default defineComponent({
   methods: {
     addResource(): void {
       const isResourceValid = this.validateResource(this.resource);
+      if(!this.isValidLink) return;
       if(!isResourceValid) {
         this.isDialogVisible = true;
         return;
