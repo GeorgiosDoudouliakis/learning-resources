@@ -51,9 +51,6 @@ export default defineComponent({
     }
   },
   methods: {
-    BaseDialog() {
-      return BaseDialog
-    },
     setActiveTab(tab: ActiveTab): void {
       this.activeTab = tab;
     },
