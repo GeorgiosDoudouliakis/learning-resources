@@ -11,7 +11,8 @@
       </div>
       <div>
         <label for="link">Link</label>
-        <input type="text" id="link" autocomplete="off" v-model="resource.link"/>
+        <input type="text" id="link" autocomplete="off" v-model="resource.link" @input="validateLink()"/>
+        <small class="error" v-if="resource.link && !isValidLink">Not valid link!</small>
       </div>
       <button>Add</button>
     </form>
@@ -51,7 +52,8 @@ export default defineComponent({
         link: ""
       } as Resource,
       isSnackbarVisible: false as boolean,
-      isDialogVisible: false as boolean
+      isDialogVisible: false as boolean,
+      isValidLink: false as boolean
     }
   },
   methods: {
@@ -68,6 +70,10 @@ export default defineComponent({
     validateResource(resource: Resource): boolean {
       const { title, description, link } = resource;
       return title !== "" && description !== "" && link !== "";
+    },
+    validateLink(): void {
+      const regex = new RegExp(/^((https|http):(\/\/))/);
+      this.isValidLink = regex.test(this.resource.link);
     },
     showSnackbar(): void {
       this.isSnackbarVisible = true;
@@ -124,5 +130,14 @@ export default defineComponent({
       background: #f8f8f8;
       outline: 1px solid #2364b7;
     }
+  }
+
+  small {
+    font-size: 1.2rem;
+    margin-top: .5rem;
+  }
+
+  .error {
+    color: #ff3232;
   }
 </style>
