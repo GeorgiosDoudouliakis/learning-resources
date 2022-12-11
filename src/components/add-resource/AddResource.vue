@@ -3,15 +3,15 @@
     <form @submit.prevent="addResource()">
       <div>
         <label for="title">Title</label>
-        <input type="text" id="title" autocomplete="off" v-model="resource.title"/>
+        <input type="text" id="title" autocomplete="off" v-model.trim="resource.title"/>
       </div>
       <div>
         <label for="description">Description</label>
-        <textarea id="description" rows="10" autocomplete="off" v-model="resource.description"/>
+        <textarea id="description" rows="10" autocomplete="off" v-model.trim="resource.description"/>
       </div>
       <div>
         <label for="link">Link</label>
-        <input type="text" id="link" autocomplete="off" v-model="resource.link" @input="validateLink()"/>
+        <input type="text" id="link" autocomplete="off" v-model.trim="resource.link" @input="validateLink()"/>
         <small class="error" v-if="resource.link && !isValidLink">Not valid link!</small>
       </div>
       <button :disabled="!isValidLink" :style="{ 'opacity': isValidLink ? '1' : '.5', 'cursor': isValidLink ? '' : 'no-drop' }">Add</button>
