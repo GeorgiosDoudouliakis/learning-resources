@@ -14,7 +14,7 @@
         <input type="text" id="link" autocomplete="off" v-model="resource.link" @input="validateLink()"/>
         <small class="error" v-if="resource.link && !isValidLink">Not valid link!</small>
       </div>
-      <button>Add</button>
+      <button :disabled="!isValidLink" :style="{ 'opacity': isValidLink ? '1' : '.5', 'cursor': isValidLink ? '' : 'no-drop' }">Add</button>
     </form>
   </base-layout>
   <teleport to="body">
@@ -59,7 +59,6 @@ export default defineComponent({
   methods: {
     addResource(): void {
       const isResourceValid = this.validateResource(this.resource);
-      if(!this.isValidLink) return;
       if(!isResourceValid) {
         this.isDialogVisible = true;
         return;
@@ -126,11 +125,6 @@ export default defineComponent({
   button {
     color: #fff;
     background: #2364b7;
-    &:hover {
-      color: #2364b7;
-      background: #f8f8f8;
-      outline: 1px solid #2364b7;
-    }
   }
 
   small {
