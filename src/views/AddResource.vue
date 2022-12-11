@@ -1,6 +1,6 @@
 <template>
   <base-layout>
-    <form @submit.prevent="addResource(resource)">
+    <form @submit.prevent="addResource()">
       <div>
         <label for="title">Title</label>
         <input type="text" id="title" autocomplete="off" v-model="resource.title"/>
@@ -16,6 +16,10 @@
       <button>Add</button>
     </form>
   </base-layout>
+  <teleport to="body">
+    <BaseSnackbar v-if="isSnackbarVisible"/>
+    <BaseDialog v-if="isDialogVisible" @close-dialog="closeDialog()"/>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -24,6 +28,8 @@ import {defineComponent} from "vue";
 
 /* Place component imports here */
 import BaseLayout from "@/components/base/BaseLayout.vue";
+import BaseSnackbar from "@/components/base/BaseSnackbar.vue";
+import BaseDialog from "@/components/base/BaseDialog.vue";
 
 /* Place any other imports here */
 import {Resource} from "@/interfaces/resource.interface";
@@ -31,9 +37,11 @@ import {Resource} from "@/interfaces/resource.interface";
 export default defineComponent({
   name: "AddResource",
   components: {
-    BaseLayout
+    BaseLayout,
+    BaseSnackbar,
+    BaseDialog
   },
-  inject: ['addResource'],
+  inject: ['resources'],
   data() {
     return {
       resource: {
@@ -41,7 +49,38 @@ export default defineComponent({
         title: "",
         description: "",
         link: ""
-      } as Resource
+      } as Resource,
+      isSnackbarVisible: false as boolean,
+      isDialogVisible: false as boolean
+    }
+  },
+  methods: {
+    addResource(): void {
+      const isResourceValid = this.validateResource(this.resource);
+      if(!isResourceValid) {
+        this.isDialogVisible = true;
+        return;
+      }
+      (this.resources as Resource[]).push(this.resource);
+      this.showSnackbar();
+      this.resetForm();
+    },
+    validateResource(resource: Resource): boolean {
+      const { title, description, link } = resource;
+      return title !== "" && description !== "" && link !== "";
+    },
+    showSnackbar(): void {
+      this.isSnackbarVisible = true;
+      const timeout = setTimeout(() => {
+        this.isSnackbarVisible = false;
+        clearTimeout(timeout);
+      }, 3000);
+    },
+    resetForm(): void {
+      this.resource = {} as Resource;
+    },
+    closeDialog(): void {
+      this.isDialogVisible = false;
     }
   }
 })
