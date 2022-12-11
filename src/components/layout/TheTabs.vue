@@ -35,8 +35,8 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     width: 80vw;
-    padding: 3rem 0 4rem 0;
-    margin: auto;
+    padding: 2rem 0;
+    margin: 0 auto 2rem auto;
   }
 
   button {

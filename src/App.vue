@@ -64,8 +64,8 @@ export default defineComponent({
 
   main {
     width: 80vw;
-    margin: auto;
-    min-height: calc(100vh - 105px);
+    margin: 0 auto 2rem auto;
+    min-height: calc(100vh - 137px);
   }
 
   button {
