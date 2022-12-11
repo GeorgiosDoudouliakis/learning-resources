@@ -29,8 +29,8 @@ import {defineComponent} from "vue";
 
 /* Place component imports here */
 import BaseLayout from "@/components/base/BaseLayout.vue";
-import AddResourceSnackbar from "@/components/add-resource/AddResourceSnackbar.vue";
-import AddResourceDialog from "@/components/add-resource/AddResourceDialog.vue";
+import AddResourceSnackbar from "@/views/add-resource/AddResourceSnackbar.vue";
+import AddResourceDialog from "@/views/add-resource/AddResourceDialog.vue";
 
 /* Place any other imports here */
 import {Resource} from "@/interfaces/resource.interface";

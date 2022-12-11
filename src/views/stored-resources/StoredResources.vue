@@ -11,7 +11,7 @@ import {defineComponent} from "vue";
 
 /* Place component imports here */
 import BaseLayout from "@/components/base/BaseLayout.vue";
-import StoredResource from "@/components/stored-resources/StoredResource.vue";
+import StoredResource from "@/views/stored-resources/StoredResource.vue";
 
 export default defineComponent({
   name: "StoredResources",

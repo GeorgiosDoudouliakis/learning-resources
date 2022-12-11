@@ -17,8 +17,8 @@ import { defineComponent } from 'vue';
 import TheHeader from "@/components/layout/TheHeader.vue";
 import TheTabs from "@/components/layout/TheTabs.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
-import StoredResources from "@/components/stored-resources/StoredResources.vue";
-import AddResource from "@/components/add-resource/AddResource.vue";
+import StoredResources from "@/views/stored-resources/StoredResources.vue";
+import AddResource from "@/views/add-resource/AddResource.vue";
 
 /* Place any other imports here */
 import {ActiveTab} from "@/types/active-tab.type";
