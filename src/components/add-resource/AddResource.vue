@@ -17,8 +17,8 @@
     </form>
   </base-layout>
   <teleport to="body">
-    <BaseSnackbar v-if="isSnackbarVisible"/>
-    <BaseDialog v-if="isDialogVisible" @close-dialog="closeDialog()"/>
+    <AddResourceSnackbar v-if="isSnackbarVisible"/>
+    <AddResourceDialog v-if="isDialogVisible" @close-dialog="closeDialog()"/>
   </teleport>
 </template>
 
@@ -28,8 +28,8 @@ import {defineComponent} from "vue";
 
 /* Place component imports here */
 import BaseLayout from "@/components/base/BaseLayout.vue";
-import BaseSnackbar from "@/components/base/BaseSnackbar.vue";
-import BaseDialog from "@/components/base/BaseDialog.vue";
+import AddResourceSnackbar from "@/components/add-resource/AddResourceSnackbar.vue";
+import AddResourceDialog from "@/components/add-resource/AddResourceDialog.vue";
 
 /* Place any other imports here */
 import {Resource} from "@/interfaces/resource.interface";
@@ -38,8 +38,8 @@ export default defineComponent({
   name: "AddResource",
   components: {
     BaseLayout,
-    BaseSnackbar,
-    BaseDialog
+    AddResourceSnackbar,
+    AddResourceDialog
   },
   inject: ['resources'],
   data() {

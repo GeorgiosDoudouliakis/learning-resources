@@ -1,7 +1,7 @@
 <template>
   <p>Number of resources: {{ resources.length }}</p>
   <base-layout>
-    <BaseResource v-for="resource in resources" :key="resource.id" :resource="resource"/>
+    <StoredResource v-for="resource in resources" :key="resource.id" :resource="resource"/>
   </base-layout>
 </template>
 
@@ -11,13 +11,13 @@ import {defineComponent} from "vue";
 
 /* Place component imports here */
 import BaseLayout from "@/components/base/BaseLayout.vue";
-import BaseResource from "@/components/base/BaseResource.vue";
+import StoredResource from "@/components/stored-resources/StoredResource.vue";
 
 export default defineComponent({
   name: "StoredResources",
   components: {
     BaseLayout,
-    BaseResource
+    StoredResource
   },
   inject: ['resources']
 })

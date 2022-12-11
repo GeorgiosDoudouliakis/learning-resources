@@ -13,7 +13,7 @@ import {defineComponent} from "vue";
 import {Resource} from "@/interfaces/resource.interface";
 
 export default defineComponent({
-  name: "BaseResource",
+  name: "StoredResource",
   props: ['resource'],
   inject: ['resources'],
   methods: {
